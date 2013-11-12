@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"></meta>
+<link rel="stylesheet" href="css/neli.css" type="text/css" />
+<script type="text/javascript" src="js/lib/fastclick.js"></script>
+<script type="text/javascript" src="js/lib/requestAnimationFrame.js"></script>
+<script type="text/javascript" src="js/neli.js"></script>
+<script>
+// VARIABLES FOR NELI.JS
+// objects
+var me = '',
+    enemy = '',
+    point = '',
+    myHeight = 0,
+    myWidth = 0,
+    objectHeight = 0,
+    objectWidth = 0;
+
+// elements
+var canvas = '',
+    gameElem = '',
+    menuElem = '',
+    prevPointsElem = '',
+    startGameBtn = '';
+    // helpers
+    // helpElem = '';
+    // timeElem = '';
+
+// contexts
+var ctx = '';
+
+// counters
+var meMaxBottom = '',
+    enemyMaxLeft = '',
+    timeCounter = '',
+    enemyLevel = '',
+    enemyTimeCounter = '',
+    enemyMoveCounter = '',
+    points ='';
+    
+// states
+var meGoingUp = '',
+    myPosition = '';
+
+
+// GAME INIT
+function initGame(){
+  // disable ipad scrolling
+  document.addEventListener('touchmove',function(event){event.preventDefault();},false);
+
+  // elements to variables
+  gameElem = document.getElementById('game');
+  menuElem = document.getElementById('menu');
+  startGameBtn = document.getElementById('startGame');
+  prevPointsElem = document.getElementById('prevPoints');
+  helpElem = document.getElementById('help');
+  timeElem = document.getElementById('time');
+  canvas = document.getElementById('myCanvas');
+  ctx = canvas.getContext("2d");
+
+  // attach fastclick
+  FastClick.attach(canvas);
+
+  // start/init the game by btn press
+  startGameBtn.onclick = function(){
+    meGoingUp = false,
+    meMaxBottom = 298,
+    enemyMaxLeft = -10,
+    timeCounter = 0,
+    enemyLevel = 1,
+    enemyTimeCounter = 0,
+    enemyMoveCounter = 0,
+    points = 0;
+    // helpElem.innerHTML = '0';
+    myHeight = 20;
+    myWidth = 20;
+    objectHeight = 10;
+    objectWidth = 10;
+
+    // set object start positions and sizes
+    me = [35, 100, myWidth, myHeight];
+    enemy = [488, getRandom(0,308), objectWidth, objectHeight];
+    point = [488, getRandom(0,308), objectWidth, objectHeight];
+
+    myPosition = me[1];
+
+    // hide menu / show game canvas
+    menuElem.style.display = 'none';
+    gameElem.style.display = 'block';
+    requestAnimationFrame(updateProgress);
+  }
+
+  canvas.ontouchstart=function(){
+    meGoingUp = true;
+  };
+
+  canvas.ontouchend=function(){
+    meGoingUp = false;
+  };
+}
+</script>
+</head>
+
+<body onload="initGame()">
+	<div id="menu">
+		<p id="prevPoints"></p>
+		<p id="startGame">start</p>
+	</div>
+	<div id="game">
+		<canvas id="myCanvas" width="478" height="318"></canvas>
+		<p id="time"></p>
+		<p id="help"></p>
+	</div>
+</body>
+</html>
+
