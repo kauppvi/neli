@@ -62,7 +62,6 @@ Foe.prototype.draw = function () {
   game.ctx.fillRect(this.positionOnX,this.positionOnY,this.height,this.width);
 };
 
-
 var Collectable = function (posOnX,posOnY,height,width) {
   this.positionOnX = posOnX;
   this.positionOnY = posOnY;

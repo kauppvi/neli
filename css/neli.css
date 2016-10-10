@@ -1,6 +1,6 @@
 #canvas {
-  height: 318px;
-  width: 478px;
   background-color: #eee;
   border: solid 1px #ccc;
+  height: 318px;
+  width: 478px;
   -webkit-tap-highlight-color: rgba(0,0,0,0); }

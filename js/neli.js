@@ -23,7 +23,7 @@ Neli = function () {
       collectable.draw();
     }
 
-    // enemy hit
+    // foe hit
     if ((player.positionOnX<(foe.positionOnX+foe.width))&&(foe.positionOnX<(player.positionOnX+player.width))&&(player.positionOnY<(foe.positionOnY+foe.height))&&(foe.positionOnY<(player.positionOnY+player.height))){
       gameOver();
     } else {
