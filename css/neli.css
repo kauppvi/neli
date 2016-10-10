@@ -1,13 +1,6 @@
-#game { 
-  display: none; }
-  
-#myCanvas { 
-  height: 318px; 
-  width: 478px; 
-  background-color: #eee; 
-  border: solid 1px #ccc; 
+#canvas {
+  height: 318px;
+  width: 478px;
+  background-color: #eee;
+  border: solid 1px #ccc;
   -webkit-tap-highlight-color: rgba(0,0,0,0); }
-  
-#startGame {
-  color: blue;
-}
