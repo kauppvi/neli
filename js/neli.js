@@ -15,8 +15,6 @@ Neli = function () {
     // collectable
     if ((player.positionOnX<(collectable.positionOnX+collectable.width))&&(collectable.positionOnX<(player.positionOnX+player.width))&&(player.positionOnY<(collectable.positionOnY+collectable.height))&&(collectable.positionOnY<(player.positionOnY+player.height))){
       game.pointCounter++;
-      player.width++;
-      player.height++;
       collectable.reset();
     } else {
       collectable.move();

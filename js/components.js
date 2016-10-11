@@ -21,7 +21,7 @@ var Player = function (posOnX,posOnY,height,width) {
   this.height = height;
   this.width = width;
 
-  this.maxPositionOnY = 298;
+  this.maxPositionOnY = 318-this.height;
   this.goingUp = false;
 };
 Player.prototype.move = function () {
@@ -34,7 +34,7 @@ Player.prototype.move = function () {
 };
 Player.prototype.draw = function () {
   // draw
-  game.ctx.fillStyle='blue';
+  game.ctx.fillStyle = '#FFD393';
   game.ctx.fillRect(this.positionOnX,this.positionOnY,this.height,this.width);
 };
 
@@ -46,7 +46,7 @@ var Foe = function (posOnX,posOnY,height,width) {
 
 };
 Foe.prototype.reset = function () {
-  this.positionOnX= 488;
+  this.positionOnX = 488;
   this.positionOnY = getRandom(0,308);
 }
 Foe.prototype.move = function () {
@@ -58,7 +58,7 @@ Foe.prototype.move = function () {
 }
 Foe.prototype.draw = function () {
   // draw
-  game.ctx.fillStyle='red';
+  game.ctx.fillStyle = '#F54F29';
   game.ctx.fillRect(this.positionOnX,this.positionOnY,this.height,this.width);
 };
 
@@ -81,6 +81,6 @@ Collectable.prototype.move = function () {
 }
 Collectable.prototype.draw = function () {
   // draw
-  game.ctx.fillStyle='orange';
+  game.ctx.fillStyle = '#FF974F';
   game.ctx.fillRect(this.positionOnX,this.positionOnY,this.height,this.width);
 };
