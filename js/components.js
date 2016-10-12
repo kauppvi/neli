@@ -13,7 +13,7 @@ var Game = function () {
 
   // attach fastclick
   FastClick.attach(this.canvasElem);
-}
+};
 
 var Player = function (posOnX,posOnY,height,width) {
   this.positionOnX = posOnX;
@@ -43,19 +43,18 @@ var Foe = function (posOnX,posOnY,height,width) {
   this.positionOnY = posOnY;
   this.height = height;
   this.width = width;
-
 };
 Foe.prototype.reset = function () {
   this.positionOnX = 488;
   this.positionOnY = getRandom(0,308);
-}
+};
 Foe.prototype.move = function () {
   // enemy too far left
   if (this.positionOnX<-this.width){
     this.reset();
   }
   this.positionOnX -= 5;
-}
+};
 Foe.prototype.draw = function () {
   // draw
   game.ctx.fillStyle = '#F54F29';
@@ -71,14 +70,14 @@ var Collectable = function (posOnX,posOnY,height,width) {
 Collectable.prototype.reset = function () {
   this.positionOnX = 488;
   this.positionOnY = getRandom(0,290);
-}
+};
 Collectable.prototype.move = function () {
   // point too far left or collected
   if(this.positionOnX<-this.width){
     this.reset();
   }
   this.positionOnX -= 4;
-}
+};
 Collectable.prototype.draw = function () {
   // draw
   game.ctx.fillStyle = '#FF974F';
