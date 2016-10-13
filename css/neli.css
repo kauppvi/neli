@@ -1,3 +1,9 @@
+#game {
+  margin: 0 auto;
+  position: relative;
+  width: 500px;
+}
+
 #canvas {
   background-color: #405952;
   border: solid 1px #9C9B7A;
@@ -6,6 +12,19 @@
   margin: 0 auto;
   width: 478px;
   -webkit-tap-highlight-color: rgba(0,0,0,0); 
+}
+
+#menu {
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 500px;
+}
+
+#start_btn:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 body {

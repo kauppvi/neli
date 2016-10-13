@@ -4,7 +4,6 @@ var Game = function () {
 
   // elements to variables
   this.gameElem = document.getElementById('game');
-  this.timeElem = document.getElementById('time');
   this.canvasElem = document.getElementById('canvas');
   this.ctx = this.canvasElem.getContext("2d");
 
@@ -82,4 +81,17 @@ Collectable.prototype.draw = function () {
   // draw
   game.ctx.fillStyle = '#FF974F';
   game.ctx.fillRect(this.positionOnX,this.positionOnY,this.height,this.width);
+};
+
+var Menu = function () {
+  // elements to variables
+  this.menuElem = document.getElementById('menu');
+  this.lastScoreElem = document.getElementById('last_score');
+};
+Menu.prototype.show = function () {    
+  this.lastScoreElem.innerHTML = 'Previous score: '+game.pointCounter;
+  this.menuElem.style.display = 'block';
+};
+Menu.prototype.hide = function () {
+  this.menuElem.style.display = 'none';
 };

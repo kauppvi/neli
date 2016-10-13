@@ -1,13 +1,19 @@
 Neli = function () {
+  
   game = new Game();
+  menu = new Menu();
   player = new Player(35,100,20,20);
   foe = new Foe(435,110,10,10);
   collectable = new Collectable(435,100,10,10);
 
-  // states
-
+  endGame = function () {
+    menu.show();
+  }
+    
   updateState = function () {
     game.ctx.clearRect(0, 0, game.canvasElem.width, game.canvasElem.height);
+    game.timeCounter++;
+      
     player.move();
     player.draw();
       
@@ -16,7 +22,6 @@ Neli = function () {
 
     foe.move();
     foe.draw();
-    game.timeCounter++;
       
     // collectable hit
     if ((player.positionOnX<(collectable.positionOnX+collectable.width))&&(collectable.positionOnX<(player.positionOnX+player.width))&&(player.positionOnY<(collectable.positionOnY+collectable.height))&&(collectable.positionOnY<(player.positionOnY+player.height))){
@@ -26,14 +31,10 @@ Neli = function () {
 
     // foe hit
     if ((player.positionOnX<(foe.positionOnX+foe.width))&&(foe.positionOnX<(player.positionOnX+player.width))&&(player.positionOnY<(foe.positionOnY+foe.height))&&(foe.positionOnY<(player.positionOnY+player.height))){
-      gameOver();
+      endGame();
+    } else {
+      requestAnimationFrame(updateState);
     }
-    
-    requestAnimationFrame(updateState);
-  }
-
-  gameOver = function () {
-    game.gameElem.innerHTML = 'Points collected: '+game.pointCounter;
   }
 
   // events
@@ -53,9 +54,8 @@ Neli = function () {
   game.canvasElem.onmouseup = function() {
     player.goingUp = false;
   };
-
-
+    
   // start running the game
-
+  menu.hide();
   updateState();
 }
