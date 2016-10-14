@@ -2,10 +2,10 @@ Neli = function () {
   
   game = new Game();
   menu = new Menu();
-  player = new Player(35,100,20,20);
-  foe = new Foe(435,110,10,10);
-  collectable = new Collectable(435,100,10,10);
-
+  player = new Player(35,100,20,20,2,'#FFD393');
+  collectable = new Collectable(435,getRandom(0,290),10,10,2,'#FF974F');
+  foe = new Foe(435,getRandom(0,290),10,10,5,'#F54F29');
+    
   endGame = function () {
     menu.show();
   }
@@ -15,18 +15,18 @@ Neli = function () {
     game.timeCounter++;
       
     player.move();
-    player.draw();
+    game.drawComponent(player.positionOnX,player.positionOnY,player.height,player.width,player.color);
       
     collectable.move();
-    collectable.draw();
+    game.drawComponent(collectable.positionOnX,collectable.positionOnY,collectable.height,collectable.width,collectable.color);
 
     foe.move();
-    foe.draw();
+    game.drawComponent(foe.positionOnX,foe.positionOnY,foe.height,foe.width,foe.color);
       
     // collectable hit
     if ((player.positionOnX<(collectable.positionOnX+collectable.width))&&(collectable.positionOnX<(player.positionOnX+player.width))&&(player.positionOnY<(collectable.positionOnY+collectable.height))&&(collectable.positionOnY<(player.positionOnY+player.height))){
       game.pointCounter++;
-      collectable.reset();
+      collectable.reset();  
     }
 
     // foe hit

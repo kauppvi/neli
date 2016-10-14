@@ -13,58 +13,38 @@ var Game = function () {
   // attach fastclick
   FastClick.attach(this.canvasElem);
 };
+Game.prototype.drawComponent = function (posOnX,posOnY,height,width,color) {
+  this.ctx.fillStyle = color;
+  this.ctx.fillRect(posOnX,posOnY,height,width);
+};
 
-var Player = function (posOnX,posOnY,height,width) {
+var Player = function (posOnX,posOnY,height,width,speed,color) {
   this.positionOnX = posOnX;
   this.positionOnY = posOnY;
   this.height = height;
   this.width = width;
-
+  this.speed = speed;
+  this.color = color;
+    
   this.maxPositionOnY = 318-this.height;
   this.goingUp = false;
 };
 Player.prototype.move = function () {
   // move inside canvas
   if ((this.goingUp) && (this.positionOnY>0)){
-    this.positionOnY -= 2;
+    this.positionOnY -= this.speed;
   } else if ((!this.goingUp) && (this.positionOnY<this.maxPositionOnY)) {
-    this.positionOnY += 2;
+    this.positionOnY += this.speed;
   }
 };
-Player.prototype.draw = function () {
-  // draw
-  game.ctx.fillStyle = '#FFD393';
-  game.ctx.fillRect(this.positionOnX,this.positionOnY,this.height,this.width);
-};
 
-var Foe = function (posOnX,posOnY,height,width) {
+var Collectable = function (posOnX,posOnY,height,width,speed,color) {
   this.positionOnX = posOnX;
   this.positionOnY = posOnY;
   this.height = height;
   this.width = width;
-};
-Foe.prototype.reset = function () {
-  this.positionOnX = 488;
-  this.positionOnY = getRandom(0,308);
-};
-Foe.prototype.move = function () {
-  // enemy too far left
-  if (this.positionOnX<-this.width){
-    this.reset();
-  }
-  this.positionOnX -= 5;
-};
-Foe.prototype.draw = function () {
-  // draw
-  game.ctx.fillStyle = '#F54F29';
-  game.ctx.fillRect(this.positionOnX,this.positionOnY,this.height,this.width);
-};
-
-var Collectable = function (posOnX,posOnY,height,width) {
-  this.positionOnX = posOnX;
-  this.positionOnY = posOnY;
-  this.height = height;
-  this.width = width;
+  this.speed = speed;
+  this.color = color;    
 };
 Collectable.prototype.reset = function () {
   this.positionOnX = 488;
@@ -77,10 +57,25 @@ Collectable.prototype.move = function () {
   }
   this.positionOnX -= 4;
 };
-Collectable.prototype.draw = function () {
-  // draw
-  game.ctx.fillStyle = '#FF974F';
-  game.ctx.fillRect(this.positionOnX,this.positionOnY,this.height,this.width);
+
+var Foe = function (posOnX,posOnY,height,width,speed,color) {
+  this.positionOnX = posOnX;
+  this.positionOnY = posOnY;
+  this.height = height;
+  this.width = width;
+  this.speed = speed;
+  this.color = color;    
+};
+Foe.prototype.reset = function () {
+  this.positionOnX = 488;
+  this.positionOnY = getRandom(0,308);
+};
+Foe.prototype.move = function () {
+  // enemy too far left
+  if (this.positionOnX<-this.width){
+    this.reset();
+  }
+  this.positionOnX -= this.speed;
 };
 
 var Menu = function () {
@@ -89,7 +84,7 @@ var Menu = function () {
   this.lastScoreElem = document.getElementById('last_score');
 };
 Menu.prototype.show = function () {    
-  this.lastScoreElem.innerHTML = 'Previous score: '+game.pointCounter;
+  this.lastScoreElem.innerHTML = 'Score: '+game.pointCounter;
   this.menuElem.style.display = 'block';
 };
 Menu.prototype.hide = function () {
