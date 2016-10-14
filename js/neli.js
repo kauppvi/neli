@@ -3,13 +3,13 @@ Neli = function () {
   game = new Game();
   menu = new Menu();
   player = new Player(35,100,20,20,2,'#FFD393');
-  collectable = new Collectable(435,getRandom(0,290),10,10,2,'#FF974F');
-  foe = new Foe(435,getRandom(0,290),10,10,5,'#F54F29');
+  collectable = new Collectable(435,getRandom(0,290),10,10,4,'#FF974F');
+  foe = new Foe(435,getRandom(0,290),15,15,7,'#F54F29');
     
   endGame = function () {
     menu.show();
   }
-    
+
   updateState = function () {
     game.ctx.clearRect(0, 0, game.canvasElem.width, game.canvasElem.height);
     game.timeCounter++;
@@ -22,11 +22,13 @@ Neli = function () {
 
     foe.move();
     game.drawComponent(foe.positionOnX,foe.positionOnY,foe.height,foe.width,foe.color);
+    
+    // check for
       
     // collectable hit
     if ((player.positionOnX<(collectable.positionOnX+collectable.width))&&(collectable.positionOnX<(player.positionOnX+player.width))&&(player.positionOnY<(collectable.positionOnY+collectable.height))&&(collectable.positionOnY<(player.positionOnY+player.height))){
       game.pointCounter++;
-      collectable.reset();  
+      collectable.reset();
     }
 
     // foe hit

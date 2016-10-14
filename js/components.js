@@ -55,7 +55,7 @@ Collectable.prototype.move = function () {
   if(this.positionOnX<-this.width){
     this.reset();
   }
-  this.positionOnX -= 4;
+  this.positionOnX -= this.speed;
 };
 
 var Foe = function (posOnX,posOnY,height,width,speed,color) {

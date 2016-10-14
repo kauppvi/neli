@@ -9,20 +9,17 @@
 <script type="text/javascript" src="js/components.js"></script>
 <script type="text/javascript" src="js/helpers.js"></script>
 <script type="text/javascript" src="js/neli.js"></script>
-
-<script>
-var game,
-    player,
-    foe,
-    collectable;
-</script>
-
 </head>
 
 <body>
     <div id="game">
 		<canvas id="canvas" width="478" height="318"></canvas>
-        <div id="menu"><h1>NELI</h1><p id="start_btn" onclick="Neli()">Start</p><p id="last_score"></p></div>
+        <div id="menu">
+            <h1>NELI</h1>
+            <p id="start_btn" onclick="Neli()">Start</p>
+            <p id="last_score"></p>
+            <p>Tip: <span id="tip_collectable">collect</span>, <span id="tip_foe">avoid</span>.</p>
+        </div>
     </div>
 </body>
 </html>
