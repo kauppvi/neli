@@ -1,33 +1,48 @@
 Neli = function () {
   
-  game = new Game();
+  arena = new Arena();
   menu = new Menu();
   player = new Player(35,100,20,20,2,'#FFD393');
   collectable = new Collectable(435,getRandom(0,290),10,10,4,'#FF974F');
   foe = new Foe(435,getRandom(0,290),15,15,7,'#F54F29');
+      
+  foeLevelCounter = 1;
+  levelUpCounter = 0;
+  pointCounter = 0;
+  timeCounter = 0;
     
   endGame = function () {
     menu.show();
   }
 
+  levelUp = function () {
+    foeLevelCounter++;
+    foe.levelUp(foeLevelCounter);
+  }
+  
   updateState = function () {
-    game.ctx.clearRect(0, 0, game.canvasElem.width, game.canvasElem.height);
-    game.timeCounter++;
+    arena.ctx.clearRect(0, 0, arena.canvasElem.width, arena.canvasElem.height);
+    timeCounter++;
       
     player.move();
-    game.drawComponent(player.positionOnX,player.positionOnY,player.height,player.width,player.color);
+    arena.drawComponent(player.positionOnX,player.positionOnY,player.height,player.width,player.color);
       
     collectable.move();
-    game.drawComponent(collectable.positionOnX,collectable.positionOnY,collectable.height,collectable.width,collectable.color);
+    arena.drawComponent(collectable.positionOnX,collectable.positionOnY,collectable.height,collectable.width,collectable.color);
 
     foe.move();
-    game.drawComponent(foe.positionOnX,foe.positionOnY,foe.height,foe.width,foe.color);
+    arena.drawComponent(foe.positionOnX,foe.positionOnY,foe.height,foe.width,foe.color);
     
     // check for
       
     // collectable hit
     if ((player.positionOnX<(collectable.positionOnX+collectable.width))&&(collectable.positionOnX<(player.positionOnX+player.width))&&(player.positionOnY<(collectable.positionOnY+collectable.height))&&(collectable.positionOnY<(player.positionOnY+player.height))){
-      game.pointCounter++;
+      pointCounter++;
+      levelUpCounter++;
+      if (levelUpCounter > 10) {
+          levelUp();
+          levelUpCounter = 0;
+      }
       collectable.reset();
     }
 
@@ -41,19 +56,19 @@ Neli = function () {
 
   // events
 
-  game.canvasElem.ontouchstart = function() {
+  arena.canvasElem.ontouchstart = function() {
     player.goingUp = true;
   };
 
-  game.canvasElem.onmousedown = function() {
+  arena.canvasElem.onmousedown = function() {
     player.goingUp = true;
   };
 
-  game.canvasElem.ontouchend = function() {
+  arena.canvasElem.ontouchend = function() {
     player.goingUp = false;
   };
 
-  game.canvasElem.onmouseup = function() {
+  arena.canvasElem.onmouseup = function() {
     player.goingUp = false;
   };
     

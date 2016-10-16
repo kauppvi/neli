@@ -1,19 +1,15 @@
-var Game = function () {
+var Arena = function () {
   // disable ipad scrolling
   document.addEventListener('touchmove',function(event){event.preventDefault();},false);
 
   // elements to variables
-  this.gameElem = document.getElementById('game');
   this.canvasElem = document.getElementById('canvas');
   this.ctx = this.canvasElem.getContext("2d");
-
-  this.timeCounter = 0;
-  this.pointCounter = 0;
 
   // attach fastclick
   FastClick.attach(this.canvasElem);
 };
-Game.prototype.drawComponent = function (posOnX,posOnY,height,width,color) {
+Arena.prototype.drawComponent = function (posOnX,posOnY,height,width,color) {
   this.ctx.fillStyle = color;
   this.ctx.fillRect(posOnX,posOnY,height,width);
 };
@@ -66,6 +62,9 @@ var Foe = function (posOnX,posOnY,height,width,speed,color) {
   this.speed = speed;
   this.color = color;    
 };
+Foe.prototype.levelUp = function (levelCounter) {
+  this.speed = this.speed*levelCounter;
+};
 Foe.prototype.reset = function () {
   this.positionOnX = 488;
   this.positionOnY = getRandom(0,308);
@@ -84,7 +83,7 @@ var Menu = function () {
   this.lastScoreElem = document.getElementById('last_score');
 };
 Menu.prototype.show = function () {    
-  this.lastScoreElem.innerHTML = 'Score: '+game.pointCounter;
+  this.lastScoreElem.innerHTML = 'Score: '+pointCounter;
   this.menuElem.style.display = 'block';
 };
 Menu.prototype.hide = function () {
