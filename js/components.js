@@ -7,7 +7,7 @@ var Arena = function (height,width) {
 
   // elements to variables
   this.canvasElem = document.getElementById('canvas');
-  this.ctx = this.canvasElem.getContext("2d");
+  this.ctx = this.canvasElem.getContext('2d');
 
   // attach fastclick
   FastClick.attach(this.canvasElem);
@@ -27,6 +27,8 @@ var Player = function (posOnX,posOnY,height,width,speed,color) {
     
   this.maxPositionOnY = arena.height-this.height;
   this.goingUp = false;
+
+  this.hasShield = false;    
 };
 Player.prototype.move = function () {
   // move inside canvas
@@ -44,6 +46,8 @@ var Collectable = function (posOnX,posOnY,height,width,speed,color) {
   this.width = width;
   this.speed = speed;
   this.color = color;
+    
+  this.providesShield = false;    
 };
 Collectable.prototype.reset = function () {
   this.positionOnX = arena.width+this.width;
@@ -55,6 +59,14 @@ Collectable.prototype.move = function () {
     this.reset();
   }
   this.positionOnX -= this.speed;
+};
+
+var Shield = function (posOnX,posOnY,height,width,color) {
+  this.positionOnX = posOnX;
+  this.positionOnY = posOnY;
+  this.height = height;
+  this.width = width;
+  this.color = color;   
 };
 
 var Foe = function (posOnX,posOnY,height,width,speed,color) {
