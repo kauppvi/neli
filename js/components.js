@@ -1,4 +1,7 @@
-var Arena = function () {
+var Arena = function (height,width) {
+  this.height = height;
+  this.width = width;
+    
   // disable ipad scrolling
   document.addEventListener('touchmove',function(event){event.preventDefault();},false);
 
@@ -22,7 +25,7 @@ var Player = function (posOnX,posOnY,height,width,speed,color) {
   this.speed = speed;
   this.color = color;
     
-  this.maxPositionOnY = 318-this.height;
+  this.maxPositionOnY = arena.height-this.height;
   this.goingUp = false;
 };
 Player.prototype.move = function () {
@@ -40,11 +43,11 @@ var Collectable = function (posOnX,posOnY,height,width,speed,color) {
   this.height = height;
   this.width = width;
   this.speed = speed;
-  this.color = color;    
+  this.color = color;
 };
 Collectable.prototype.reset = function () {
-  this.positionOnX = 488;
-  this.positionOnY = getRandom(0,290);
+  this.positionOnX = arena.width+this.width;
+  this.positionOnY = getRandom(0,arena.height-this.height);
 };
 Collectable.prototype.move = function () {
   // point too far left or collected
@@ -63,11 +66,11 @@ var Foe = function (posOnX,posOnY,height,width,speed,color) {
   this.color = color;    
 };
 Foe.prototype.levelUp = function (levelCounter) {
-  this.speed = this.speed*levelCounter;
+  this.speed = this.speed+(levelCounter*2);
 };
 Foe.prototype.reset = function () {
-  this.positionOnX = 488;
-  this.positionOnY = getRandom(0,308);
+  this.positionOnX = arena.width+this.width;
+  this.positionOnY = getRandom(0,arena.height-this.height);
 };
 Foe.prototype.move = function () {
   // enemy too far left

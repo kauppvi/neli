@@ -1,6 +1,6 @@
 Neli = function () {
   
-  arena = new Arena();
+  arena = new Arena(318,478);
   menu = new Menu();
   player = new Player(35,100,20,20,2,'#FFD393');
   collectable = new Collectable(435,getRandom(0,290),10,10,4,'#FF974F');
@@ -37,12 +37,12 @@ Neli = function () {
       
     // collectable hit
     if ((player.positionOnX<(collectable.positionOnX+collectable.width))&&(collectable.positionOnX<(player.positionOnX+player.width))&&(player.positionOnY<(collectable.positionOnY+collectable.height))&&(collectable.positionOnY<(player.positionOnY+player.height))){
-      pointCounter++;
-      levelUpCounter++;
-      if (levelUpCounter > 10) {
+      if (levelUpCounter > 9) {
           levelUp();
           levelUpCounter = 0;
       }
+      pointCounter++;
+      levelUpCounter++;
       collectable.reset();
     }
 
