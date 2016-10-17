@@ -63,7 +63,7 @@ var Foe = function (posOnX,posOnY,height,width,speed,color) {
   this.height = height;
   this.width = width;
   this.speed = speed;
-  this.color = color;    
+  this.color = color;
 };
 Foe.prototype.levelUp = function (levelCounter) {
   this.speed = this.speed+(levelCounter*2);
