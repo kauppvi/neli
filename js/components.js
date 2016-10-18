@@ -1,9 +1,6 @@
 var Arena = function (height,width) {
   this.height = height;
   this.width = width;
-    
-  // disable ipad scrolling
-  document.addEventListener('touchmove',function(event){event.preventDefault();},false);
 
   // elements to variables
   this.canvasElem = document.getElementById('canvas');
@@ -96,9 +93,11 @@ var Menu = function () {
   // elements to variables
   this.menuElem = document.getElementById('menu');
   this.lastScoreElem = document.getElementById('last_score');
+  this.highscoreElem = document.getElementById('highscore');
 };
-Menu.prototype.show = function () {    
+Menu.prototype.show = function () {
   this.lastScoreElem.innerHTML = 'Score: '+pointCounter;
+  this.highscoreElem.innerHTML = 'Highscore: '+highscore;
   this.menuElem.style.display = 'block';
 };
 Menu.prototype.hide = function () {

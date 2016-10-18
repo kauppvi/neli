@@ -11,8 +11,20 @@ Neli = function () {
   levelUpCounter = 0;
   pointCounter = 0;
   timeCounter = 0;
+
+  highscore = '';
+    
+  if (localStorage.getItem('neli_highscore') === null) {
+    highscore = 0;
+  } else {
+    highscore = localStorage.getItem('neli_highscore');
+  }
     
   endGame = function () {
+    if (pointCounter > highscore) {
+        localStorage.setItem('neli_highscore', pointCounter);
+        highscore = pointCounter; 
+    }
     menu.show();
   }
 
@@ -41,7 +53,7 @@ Neli = function () {
       
     // collectable hit
     if ((player.positionOnX<(collectable.positionOnX+collectable.width))&&(collectable.positionOnX<(player.positionOnX+player.width))&&(player.positionOnY<(collectable.positionOnY+collectable.height))&&(collectable.positionOnY<(player.positionOnY+player.height))){
-      if (levelUpCounter > 8) {
+      if (levelUpCounter > 9) {
         levelUp();
         levelUpCounter = 0;
         collectable.providesShield = true;
@@ -88,6 +100,9 @@ Neli = function () {
   arena.canvasElem.onmouseup = function() {
     player.goingUp = false;
   };
+    
+  // disable ipad scrolling
+  document.addEventListener('touchmove',function(event){event.preventDefault();},false);
     
   // start running the game
   menu.hide();
