@@ -13,16 +13,17 @@ Neli = function () {
   timeCounter = 0;
 
   highscore = '';
-    
-  if (localStorage.getItem('neli_highscore') === null) {
+  storageName = 'neli_highscore';
+ 
+  if (localStorage.getItem(storageName) === null) {
     highscore = 0;
   } else {
-    highscore = localStorage.getItem('neli_highscore');
+    highscore = localStorage.getItem(storageName);
   }
     
   endGame = function () {
     if (pointCounter > highscore) {
-        localStorage.setItem('neli_highscore', pointCounter);
+        localStorage.setItem(storageName, pointCounter);
         highscore = pointCounter; 
     }
     menu.show();
